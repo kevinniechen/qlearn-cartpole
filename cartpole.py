@@ -1,23 +1,36 @@
 import gym
 import numpy as np
 
+env = gym.make('CartPole-v0')
 
-env = gym.make('CartPole-v0')  # setup OpenAI cartpole env
+def run_episode(params):
 
-params = np.random.rand(4)  # parameters for random policy
+	total_reward = 0
 
-print("Policy: ", params)
+	observation = env.reset()
+	while True:
+		action = 0 if (params @ observation) < 0 else 1
+		observation, reward, done, info = env.step(action)
+		print(observation)
 
-# run an episode
-observation = env.reset()
-total_reward = 0
+		total_reward += reward
 
-while True:
-    action = 0 if (params @ observation) < 0 else 1  # policy
-    observation, reward, done, info = env.step(action)
-    env.render()
-    total_reward += reward
-    if done:
-        break
+		env.render()
 
-print("Reward: ", total_reward)
+		if done:
+			break
+
+	return total_reward
+
+
+for i in range(100):
+	params = np.random.rand(4)
+	print("Policy Parameters: ", params)
+	# params = [0.18507058, 0.43163198, 0.88900798, 0.98352915]  # policy
+	total_reward = run_episode(params)
+	print("Episode: ", i, " Reward: ", total_reward)
+	if total_reward >= 200:
+		print("Best Policy: ", params)
+		break
+
+env.close()
