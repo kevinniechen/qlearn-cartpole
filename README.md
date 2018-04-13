@@ -12,4 +12,7 @@
 - Run one episode on with a random policy
 - "Train a policy" by creating random policies until you get one that gives a good return for an episode
 - Test how well the above algorithm creates good policies by plotting the number episodes is required to produce a good policy, for 1000 trials
-# qlearn-cartpole
+
+# QCartpole
+- Q-Learning on Cartpole
+- DQN on Cartpole
