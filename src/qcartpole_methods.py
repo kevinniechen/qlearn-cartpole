@@ -1,3 +1,5 @@
+""" Q-Learning methods and tests for Cartpole """
+
 import gym
 import numpy as np
 import collections
@@ -37,6 +39,7 @@ def get_epsilon(t):
 def get_alpha(t):
     return max(min_alpha, min(1.0, 1.0 - math.log10((t + 1) / ada_divisor)))
 
+# tests
 def test_discretize():
     observation = env.reset()
     print("Continuous Observation: ", observation)
@@ -72,7 +75,8 @@ def plot_alpha():
     plt.title('Alpha Curve')
     plt.show()
 
-# test_discretize()
-test_q()
-# plot_epsilon()
-# plot_alpha()
+if __name__ == '__main__':
+    test_discretize()
+    # test_q()
+    # plot_epsilon()
+    # plot_alpha()
